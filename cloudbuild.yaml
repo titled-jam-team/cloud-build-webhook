@@ -1,3 +1,4 @@
+timeout: "1200s"
 steps:
   - name: 'nixos/nix:2.10.3@sha256:1ec5b4a6bee82fc5bb93f782d08fc58029715dde166139c7164c39fa5db75d23'
     entrypoint: 'nix-shell'
