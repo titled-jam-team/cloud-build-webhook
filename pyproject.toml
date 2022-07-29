@@ -3,6 +3,9 @@ name = "cloud-build-webhook"
 version = "0.1.0"
 description = ""
 authors = ["titled-jam-team"]
+packages = [
+    { include = "cloud-build-webhook", from = "src" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"

@@ -12,7 +12,8 @@ let
     projectDir = ./.;
   };
 in pkgs.dockerTools.streamLayeredImage {
-  name = "predictable";
-  contents = [ app.dependencyEnv ./src ];
-  config.Cmd = [ "/bin/python3" "main.py" ];
+  name = "europe-west2-docker.pkg.dev/titled-jam-team/titled-jam-team/cloud-build-webhook";
+  tag = (builtins.getEnv "sha");
+  contents = [ app.dependencyEnv ];
+  config.Cmd = [ "/bin/python3" "-m" "cloud-build-webhook" ];
 }

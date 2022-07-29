@@ -1,0 +1,13 @@
+steps:
+  - name: 'nixos/nix:2.10.3@sha256:1ec5b4a6bee82fc5bb93f782d08fc58029715dde166139c7164c39fa5db75d23'
+    entrypoint: 'nix-shell'
+    dir: '/workspace'
+    args: ['-p', 'bash', '--run', '
+      bash -c "sha=${COMMIT_SHA} nix-build build.nix && ./result > image.tar.gz"
+    ']
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'docker'
+    dir: '/workspace'
+    args: ['load', '-i', 'image.tar.gz']
+images:
+  - "europe-west2-docker.pkg.dev/titled-jam-team/titled-jam-team/cloud-build-webhook:${COMMIT_SHA}"
